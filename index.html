@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Employee Project Duration</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <!--  -->
+    </header>
+    <main>
+      <form id="employee-form" aria-errormessage="form-error">
+        <input
+          id="employee-data-upload"
+          name="employee-data-upload"
+          type="file"
+          accept="text/csv"
+        />
+        <select name="date-format">
+          <option disabled selected>Select an option</option>
+        </select>
+        <input type="submit" />
+      </form>
+      <div id="employee-form-error" role="alert"></div>
+      <div id="display-data"></div>
+    </main>
+    <footer>
+      <!--  -->
+    </footer>
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
