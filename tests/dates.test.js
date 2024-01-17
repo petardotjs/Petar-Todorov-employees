@@ -69,4 +69,4 @@ testCalculateOverlap();
 testFindMaxDaysWorkedPair();
 testDifferentDateFormats();
 
-console.log("All tests passed ✅");
+console.log("✅ All date-related tests passed!");

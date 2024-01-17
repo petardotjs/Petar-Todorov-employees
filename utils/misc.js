@@ -89,5 +89,12 @@ export function csvToArray(csvRaw) {
     }, {});
   });
 
+  const isSchemaConsistentForAllRecords = !result.some(
+    (emp) => Object.keys(emp).length !== Object.keys(indexToKeyMap).length
+  );
+  if (!isSchemaConsistentForAllRecords) {
+    throw new Error("Invalid csv file. Missing data for some records.");
+  }
+
   return result;
 }

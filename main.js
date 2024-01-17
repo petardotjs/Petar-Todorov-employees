@@ -39,9 +39,9 @@ form.addEventListener("submit", (e) => {
 
   reader.onload = (event) => {
     const text = event.target.result;
-    const employees = csvToArray(text);
 
     try {
+      const employees = csvToArray(text);
       const pair = findMaxDaysWorkedPair(employees, dateFormat);
       renderTable(pair);
       formErrorDiv.textContent = "";
@@ -50,7 +50,7 @@ form.addEventListener("submit", (e) => {
       formErrorDiv.textContent =
         error.message === INVALID_DATE_FORMAT
           ? error.message
-          : "Something seems to be off. Please double check your csv file for errors and try again";
+          : "Something seems to be off. Please double check your csv file for errors and inconsistencies and try again";
       form["aria-invalid"] = true;
       return;
     }
