@@ -1,3 +1,4 @@
+import { INVALID_DATE_FORMAT } from "../constants/date-formats.js";
 import { parse } from "../node_modules/date-fns/index.mjs";
 
 export function findMaxDaysWorkedPair(employees, dateFormat) {
@@ -36,7 +37,7 @@ function parseDate(dateString, format) {
 
   const parsedDate = parse(dateString, format, new Date());
   if (isNaN(parsedDate)) {
-    throw new Error("Invalid date format");
+    throw new Error(INVALID_DATE_FORMAT);
   }
   return parsedDate;
 }
@@ -71,13 +72,22 @@ const indexToKeyMap = {
 };
 
 export function csvToArray(csvRaw) {
-  const rows = csvRaw.split("\n");
-  const result = rows.map((row) => {
-    const columns = row.split(",");
-    return columns.reduce((acc, curr, index) => {
-      acc[indexToKeyMap[index]] = curr.trim().replace("\r", "");
+  const parsedData = Papa.parse(csvRaw, {
+    header: false,
+    dynamicTyping: true,
+    skipEmptyLines: true,
+    transform: (value) => value.trim(),
+  });
+
+  const result = parsedData.data.map((row) => {
+    return row.reduce((acc, curr, index) => {
+      const key = indexToKeyMap[index];
+      if (key) {
+        acc[key] = curr;
+      }
       return acc;
     }, {});
   });
+
   return result;
 }

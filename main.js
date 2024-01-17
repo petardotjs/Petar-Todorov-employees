@@ -1,5 +1,6 @@
 import { csvToArray, findMaxDaysWorkedPair } from "./utils/misc.js";
 import { dateFormats } from "../constants/date-formats.js";
+import { INVALID_DATE_FORMAT } from "./constants/date-formats.js";
 
 const form = document.querySelector("#employee-form");
 const employeeDataUploadInput = form.querySelector(
@@ -45,7 +46,10 @@ form.addEventListener("submit", (e) => {
       formErrorDiv.textContent = "";
     } catch (error) {
       displayDataDiv.innerHTML = "";
-      formErrorDiv.textContent = error.message;
+      formErrorDiv.textContent =
+        error.message === INVALID_DATE_FORMAT
+          ? error.message
+          : "Something seems to be off. Please double check your csv file for errors and try again";
       form["aria-invalid"] = true;
       return;
     }
@@ -78,6 +82,19 @@ function renderTable(pairData) {
     tr.appendChild(th3);
     tr.appendChild(th4);
     thead.appendChild(tr);
+  }
+  if (!pairData) {
+    const tr = document.createElement("tr");
+    const td = document.createElement("td");
+    td.setAttribute("colspan", "4");
+    td.textContent =
+      "No employees who have worked on the same project for an overlapping period of time were found";
+    tr.appendChild(td);
+    tbody.appendChild(tr);
+    table.appendChild(thead);
+    table.appendChild(tbody);
+    displayDataDiv.appendChild(table);
+    return;
   }
   {
     const tr = document.createElement("tr");

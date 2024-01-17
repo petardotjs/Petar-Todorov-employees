@@ -12,3 +12,5 @@ export const dateFormats = [
   "MMM dd, yyyy",
   "yyyy, MMM dd",
 ];
+
+export const INVALID_DATE_FORMAT = "Invalid date format";
