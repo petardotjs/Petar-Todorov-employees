@@ -37,7 +37,11 @@ body {
   height: 50px;
   border: 2px dashed hsl(0, 0%, 80%);
   position: relative;
-  cursor: crosshair;
+  background-color: hsl(0, 0%, 100%);
+}
+
+.employee-form__data-upload.file-drag-over {
+  filter: brightness(80%);
 }
 
 .employee-form__data-upload-input {

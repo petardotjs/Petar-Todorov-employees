@@ -3,12 +3,13 @@ import { dateFormats } from "../constants/date-formats.js";
 import { INVALID_DATE_FORMAT } from "./constants/date-formats.js";
 
 const form = document.querySelector("#employee-form");
-const employeeDataUploadInput = form.querySelector(
-  "#employee-data-upload-input"
-);
 const dateFormatSelect = form.querySelector("#date-format-input");
 const displayDataDiv = document.querySelector("#display-data");
 const formErrorDiv = document.querySelector("#employee-form-error");
+const employeeDataUploadDiv = form.querySelector("#employee-data-upload");
+const employeeDataUploadInput = form.querySelector(
+  "#employee-data-upload-input"
+);
 const employeeDataUploadLabel = document.querySelector(
   "#employee-data-upload-label"
 );
@@ -60,6 +61,14 @@ form.addEventListener("submit", (e) => {
 
 employeeDataUploadInput.addEventListener("change", () => {
   employeeDataUploadLabel.textContent = employeeDataUploadInput.files[0].name;
+});
+
+employeeDataUploadInput.addEventListener("dragover", () => {
+  employeeDataUploadDiv.classList.add("file-drag-over");
+});
+
+employeeDataUploadInput.addEventListener("dragleave", () => {
+  employeeDataUploadDiv.classList.remove("file-drag-over");
 });
 
 function renderTable(pairData) {
