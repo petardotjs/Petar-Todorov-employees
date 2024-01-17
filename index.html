@@ -2,30 +2,57 @@
 <html>
   <head>
     <title>Employee Project Duration</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="styles/global.css" />
   </head>
   <body>
-    <header>
-      <!--  -->
+    <header class="site-header">
+      <!-- Header Content -->
     </header>
-    <main>
-      <form id="employee-form" aria-errormessage="form-error">
-        <input
-          id="employee-data-upload"
-          name="employee-data-upload"
-          type="file"
-          accept="text/csv"
-        />
-        <select name="date-format">
-          <option disabled selected>Select an option</option>
-        </select>
-        <input type="submit" />
+    <main class="main-content">
+      <form
+        id="employee-form"
+        class="employee-form"
+        aria-errormessage="employee-form-error"
+      >
+        <h1 class="employee-form__title">Find pair</h1>
+        <div class="employee-form__data-upload">
+          <label
+            for="employee-data-upload-input"
+            class="employee-form__data-upload-label"
+            id="employee-data-upload-label"
+            >Upload a CSV file <span class="employee-form__mandatory">*</span>
+          </label>
+          <input
+            id="employee-data-upload-input"
+            class="employee-form__data-upload-input"
+            name="employee-data-upload-input"
+            type="file"
+            accept="text/csv"
+          />
+        </div>
+        <div class="employee-form__date-format">
+          <label class="date-format__label" for="date-format-input">
+            Date format<span class="employee-form__mandatory">*</span>:
+          </label>
+          <select
+            name="date-format"
+            id="date-format-input"
+            class="date-format__input"
+          >
+            <option disabled selected>Select an option</option>
+          </select>
+        </div>
+        <input type="submit" class="employee-form__submit" />
+        <div
+          id="employee-form-error"
+          class="employee-form__error"
+          role="alert"
+        ></div>
       </form>
-      <div id="employee-form-error" role="alert"></div>
-      <div id="display-data"></div>
+      <div id="display-data" class="data-display"></div>
     </main>
-    <footer>
-      <!--  -->
+    <footer class="site-footer">
+      <!-- Footer Content -->
     </footer>
     <script type="module" src="main.js"></script>
   </body>

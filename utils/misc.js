@@ -1,4 +1,4 @@
-import { parse } from "./node_modules/date-fns/index.mjs";
+import { parse } from "../node_modules/date-fns/index.mjs";
 
 export function findMaxDaysWorkedPair(employees, dateFormat) {
   let maxOverlap = 0;

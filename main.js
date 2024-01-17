@@ -1,11 +1,16 @@
-import { csvToArray, findMaxDaysWorkedPair } from "./misc.js";
+import { csvToArray, findMaxDaysWorkedPair } from "./utils/misc.js";
 import { dateFormats } from "../constants/date-formats.js";
 
 const form = document.querySelector("#employee-form");
-const employeeDataUploadInput = form.elements["employee-data-upload"];
-const dateFormatSelect = form.elements["date-format"];
+const employeeDataUploadInput = form.querySelector(
+  "#employee-data-upload-input"
+);
+const dateFormatSelect = form.querySelector("#date-format-input");
 const displayDataDiv = document.querySelector("#display-data");
 const formErrorDiv = document.querySelector("#employee-form-error");
+const employeeDataUploadLabel = document.querySelector(
+  "#employee-data-upload-label"
+);
 
 renderDateFormatSelectOptions(dateFormats);
 
@@ -14,12 +19,14 @@ form.addEventListener("submit", (e) => {
   const dateFormat = dateFormatSelect.value;
 
   if (!(employeeDataUploadInput.files.length > 0)) {
+    displayDataDiv.innerHTML = "";
     formErrorDiv.textContent = "Please upload a file";
     form["aria-invalid"] = true;
     return;
   }
 
   if (!dateFormats.includes(dateFormat)) {
+    displayDataDiv.innerHTML = "";
     formErrorDiv.textContent = "Please select a valid date format";
     form["aria-invalid"] = true;
     return;
@@ -35,7 +42,9 @@ form.addEventListener("submit", (e) => {
     try {
       const pair = findMaxDaysWorkedPair(employees, dateFormat);
       renderTable(pair);
+      formErrorDiv.textContent = "";
     } catch (error) {
+      displayDataDiv.innerHTML = "";
       formErrorDiv.textContent = error.message;
       form["aria-invalid"] = true;
       return;
@@ -43,6 +52,10 @@ form.addEventListener("submit", (e) => {
   };
 
   reader.readAsText(file);
+});
+
+employeeDataUploadInput.addEventListener("change", () => {
+  employeeDataUploadLabel.textContent = employeeDataUploadInput.files[0].name;
 });
 
 function renderTable(pairData) {
@@ -80,7 +93,7 @@ function renderTable(pairData) {
     tr.appendChild(td2);
     tr.appendChild(td3);
     tr.appendChild(td4);
-    thead.appendChild(tr);
+    tbody.appendChild(tr);
   }
   table.appendChild(thead);
   table.appendChild(tbody);
@@ -91,6 +104,6 @@ function renderDateFormatSelectOptions(dateFormats) {
   dateFormats.forEach((format) => {
     const option = document.createElement("option");
     option.textContent = format;
-    document.querySelector("select").appendChild(option);
+    document.querySelector("#date-format-input").appendChild(option);
   });
 }
