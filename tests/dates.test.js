@@ -1,5 +1,9 @@
 import assert from "node:assert";
-import { findMaxDaysWorkedPair, calculateOverlap } from "../utils/misc.js";
+import {
+  findMaxDaysWorkedPair,
+  calculateOverlap,
+  parseDate,
+} from "../utils/misc.js";
 
 function createEmployee(employeeId, projectId, dateFrom, dateTo) {
   return { employeeId, projectId, dateFrom, dateTo };
@@ -65,8 +69,15 @@ function testDifferentDateFormats() {
   assert.strictEqual(overlap4, 6, "Overlap should be 6 days");
 }
 
+function testNullShouldBeToday() {
+  const date = parseDate("NULL", "yyyy-MM-dd");
+  const today = new Date();
+  assert.strictEqual(date.toDateString(), today.toDateString());
+}
+
 testCalculateOverlap();
 testFindMaxDaysWorkedPair();
 testDifferentDateFormats();
+testNullShouldBeToday();
 
 console.log("✅ All date-related tests passed!");

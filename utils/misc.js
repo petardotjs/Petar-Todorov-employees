@@ -30,7 +30,7 @@ export function findMaxDaysWorkedPair(employees, dateFormat) {
   return maxPair;
 }
 
-function parseDate(dateString, format) {
+export function parseDate(dateString, format) {
   if (dateString === "NULL") {
     return new Date();
   }
