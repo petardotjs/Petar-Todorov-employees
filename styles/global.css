@@ -56,7 +56,8 @@ body {
   border-radius: 5px;
 }
 
-.employee-form__data-upload-input:focus + .employee-form__data-upload-label {
+.employee-form__data-upload-input:focus-visible
+  + .employee-form__data-upload-label {
   border-radius: 0;
   outline: 2px solid hsl(0, 0%, 0%);
   outline-offset: 5px;
@@ -75,7 +76,7 @@ body {
   border-radius: 5px;
 }
 
-.employee-form__submit:focus {
+.employee-form__submit:focus-visible {
   outline: 2px solid hsl(0, 0%, 0%);
   outline-offset: 5px;
 }
